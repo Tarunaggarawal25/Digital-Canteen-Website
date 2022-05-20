@@ -1,0 +1,115 @@
+{% extends "main/layout.html" %}
+{% load static %}
+
+{% block body %}
+<header id="fh5co-header" class="fh5co-cover js-fullheight" role="banner" style="background-image: url(images/hero_1.jpeg);" data-stellar-background-ratio="0.5">
+    <div class="overlay"></div>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12 text-center">
+                <div class="display-t js-fullheight">
+                    <div class="display-tc js-fullheight animate-box" data-animate-effect="fadeIn">
+                        <h1>The Best Coffee <em>&amp;</em> food <em>in</em> University</h1>
+                        
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+
+<div id="fh5co-about" class="fh5co-section">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6 col-md-pull-2 img-wrap animate-box" data-animate-effect="fadeInLeft" style="padding-left: 400px; align-self: center;">
+                <img src="../static/images/canteen.png" alt="I can not find image">
+            </div>
+            <div class="col-md-5 col-md-push-1 animate-box">
+                <div class="section-heading">
+                    <h2>We are here for you!</h2>
+                    <p>Are you a student looking for some amazing food stuffs at  your door-step?</p>
+                    
+                    <p>Looking for some super tasty and delicious food in your own University Campus?</p>
+                    <p>Well, don't worry! </p>
+                    <p>We got you covered!</p>
+                    <p>Order your favorite food from Us at some super affordable prices and enjoy your University life.</p>
+                    
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div id="fh5co-featured-menu" class="fh5co-section">
+    <div class="container">
+        <div class="row">
+            
+            
+            <div class="col-md-3 col-sm-6 col-xs-6 col-xxs-12 fh5co-item-wrap animate-box">
+                <div class="fh5co-item">
+                    <img src="{% static 'images/burger.jpg' %}" class="img-responsive" alt="I can not find image">
+                    <h3>Burger</h3>
+                    <span class="fh5co-price">£5<sup>.00</sup></span>
+                    <p>Juicy, big, loaded with toppings of your choice.</p>
+                </div>
+            </div>
+            <div class="col-md-3 col-sm-6 col-xs-6 col-xxs-12 fh5co-item-wrap animate-box">
+                <div class="fh5co-item margin_top">
+                    <img src="{% static 'images/pizza.jpg' %}" class="img-responsive" alt="I can not find image">
+                    <h3>Cheesy Pizza</h3>
+                    <span class="fh5co-price">£5<sup>.00</sup></span>
+                    <p>Crispy crunch alternative with the savory toppings, hearty sausage and pepperoni, big pieces of red and green peppers and onions, and delicious mozzarella cheese perfection.</p>
+                </div>
+            </div>
+            <div class="clearfix visible-sm-block visible-xs-block"></div>
+            <div class="col-md-3 col-sm-6 col-xs-6 col-xxs-12 fh5co-item-wrap animate-box">
+                <div class="fh5co-item">
+                    <img src="{% static 'images/hot_large.jpg' %}" class="img-responsive" alt="I can not find image">
+                    <h3>Creamy Hot Chocolate</h3>
+                    <span class="fh5co-price">£5<sup>.15</sup></span>
+                    <p>Rich flavor of Choco, endorsed with Marshmallows on top.</p>
+                </div>
+            </div>
+            <div class="col-md-3 col-sm-6 col-xs-6 col-xxs-12 fh5co-item-wrap animate-box">
+                <div class="fh5co-item margin_top">
+                    <img src="{% static 'images/cookie.jpg' %}" class="img-responsive" alt="I can not find image">
+                    <h3>Choco Chip Cookies</h3>
+                    <span class="fh5co-price">£2<sup>.00</sup></span>
+                    <p>A chewy, moist-centered cookie with barely crisp edges, flecked with semi-sweet chocolate chips.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div id="fh5co-featured-testimony" class="fh5co-section">
+    <div class="container">
+        <div class="row">
+            
+
+            <div class="col-md-5 animate-box img-to-responsive animate-box" data-animate-effect="fadeInLeft">
+                    <img src="{% static 'images/restro.jpg' %}" alt="I can not find image">
+            </div>
+            <div class="col-md-7 animate-box" data-animate-effect="fadeInRight" style="background-color: #AAA492; height: 400px; align-self: center; ">
+                
+                <blockquote>
+                    <p> &ldquo; “Food brings people together on many different levels. It’s nourishment of the soul and body; it’s truly love.” &rdquo;</p>
+                    <p class="author"><cite>&mdash; Giada De Laurentiis</cite></p>
+                </blockquote>
+            </div>
+        </div>
+    </div>
+</div>
+<div id="fh5co-started" class="fh5co-section animate-box"  data-stellar-background-ratio="0.5">
+    <div class="overlay"></div>
+    <div class="container">
+        <div class="row animate-box">
+            <div class="col-md-8 col-md-offset-2 text-center fh5co-heading">
+                <h2>Order your Food </h2>
+                <p>Sit back and relax while we deliver your food!</p>
+                <p><a href="#" class="btn btn-primary btn-outline">Order Now</a></p>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+{% endblock body %}

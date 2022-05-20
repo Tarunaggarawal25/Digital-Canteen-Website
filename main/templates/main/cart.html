@@ -1,0 +1,106 @@
+{% extends "main/layout.html" %}
+{% block content %}
+<br><br><br><br><br><br>
+<div class="cart">
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-9 mt-5">
+                
+                {% if cart_items %}
+                <h3 class="text-center text-white">Your Cart</h3>
+                <div class="table-responsive">
+                    <table class="table table-dark table-hover">
+                        <thead>
+                        <tr>
+                            <th scope="col">Name</th>
+                            <th scope="col">Description</th>
+                            <th scope="col">Specification</th>
+                            <th scope="col">Price</th>
+                            <th scope="col">Total Pieces</th>
+                            <th scope="col"></th>
+                            <th scope="col">Order Date</th>
+                            <th scope="col">Order Time</th>
+                            <th scope="col"></th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                            {% for cart in cart_items %}
+                        <tr>
+                            <td>{{ cart.item.title }} <span class="badge badge-{{ cart.item.label_colour }}">{{ cart.item.labels }}</span></td>
+                            <td>{{ cart.item.description }}</td>
+                            <td>{{ cart.item.instructions }}</td>
+                            <td>£{{ cart.item.price }}</td>
+                            <td>{{ cart.item.pieces }} pieces</td>
+                            <td><a class="btn btn-danger" href="{% url 'main:remove-from-cart' cart.id %}">Delete</a></td>
+                            <td><input type="date" name="order_date" id="" style="color: black;"></td>
+                            <td><input type ="time" name="order_time" id="" style ="color:black"></td>
+                        </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+                {% else %}
+                <br><br><br><br><br><br><br>
+                <h4 class="text-center text-white">Sorry, Your Cart is Empty....Please add Items!!!</h4>
+                {% endif %}
+            </div>
+            <div class="col-sm-3 mt-5 mb-3">
+                <div class="content-section"><br><br><br><br>
+                    <h3 class="text-center text-white">Order Summary</h3>
+                      <ul class="list-group">
+                        <li class="list-group-item list-group-item-light text-center text-dark">Total: £ {{ total }}</li>
+                        <li class="list-group-item list-group-item-light text-center text-dark">Number of Orders: {{ count }}</li>
+                        <li class="list-group-item list-group-item-light text-center text-dark">Total Pieces: {{ total_pieces }}</li>
+                        <li class="list-group-item list-group-item-light text-center text-dark"> <button type="submit" id="rzp-button1" class="btn btn-danger">Proceed to Pay</button>
+
+                            <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
+                            <script>
+                                var options = {
+                                    "key": "rzp_test_1P933hawOQIB24", // Enter the Key ID generated from the Dashboard
+                                    "amount": "{{total}}"*100 ,
+                                    "currency": "GBP",
+                                    "name": "Digital Canteen Service",
+                                    "description": "Test Transaction",
+                                    "image": "https://www.google.com/search?q=razorpay+logo&rlz=1C1UEAD_enIN992IN992&sxsrf=APq-WBuNrt5cjrNNy0LeUj7pDDKeIp_iwQ:1649053061832&tbm=isch&source=iu&ictx=1&vet=1&fir=SP-eRy58HQTkwM%252CQugHqqOtzT0q0M%252C_%253BWr_z1bjVt-anWM%252CD29gSy6pWj4asM%252C_%253BmqsQC8ttBJ5EUM%252CK94Ibb_wJEu5CM%252C_%253BP6Rhp4GOaG-24M%252CKiFfSCeHmDHL3M%252C_%253BhcDubPyeb9z57M%252CwwRlChEOiqw8rM%252C_%253B-Ejt9hhO3jvSyM%252CNKs-2iafiaqkRM%252C_%253BVmnRm5dlDXIc5M%252CfCC3Y3LhnxknuM%252C_%253BWuQVDJlaJ9rwaM%252CIlKC6kMv4g8AmM%252C_%253BceVafREH9nXN6M%252CLXcnMIFdXdfXzM%252C_%253BztjmAmezvHXyHM%252CODx7e59fd2-qdM%252C_%253Bu_snty2ZLdGdBM%252C9Xy7hJN2OzvntM%252C_%253BbVcZhIpQUiatpM%252Cg2RqYcur8zXQmM%252C_%253BA2kYg4JztgoukM%252C462RJs6fRqH7tM%252C_%253BlC-bKe7DB0bngM%252CrCQd5tSEZWwBKM%252C_&usg=AI4_-kTKaQa92O-eYtTTD4HCBUNYGE9WAw&sa=X&ved=2ahUKEwjx7Nyv4fn2AhVNRmwGHRCZCjcQ9QF6BAgcEAE#imgrc=-Ejt9hhO3jvSyM",
+                                    "order_id": "{{order_id}}", //This is a sample Order ID. Pass the `id` obtained in the response of Step 1
+                                    "handler": function (response) {
+                                      //  alert(response.razorpay_payment_id);
+                                    //    alert(response.razorpay_order_id);
+                                    //     alert(response.razorpay_signature)
+                                    window.location.href = "{% url 'main:ordered' %}";
+                                    },
+                                    
+                                    "theme": {
+                                        "color": "#3399cc"
+                                    }
+                                };
+                                var rzp1 = new Razorpay(options);
+                                rzp1.on('payment.failed', function (response) {
+                                    alert(response.error.code);
+                                    alert(response.error.description);
+                                    alert(response.error.source);
+                                    alert(response.error.step);
+                                    alert(response.error.reason);
+                                    alert(response.error.metadata.order_id);
+                                    alert(response.error.metadata.payment_id);
+
+                                });
+                                rzp1.on('payment.successful', function (response) {
+                                    alert("Payment success"); 
+                                });
+                                document.getElementById('rzp-button1').onclick = function (e) {
+                                    console.log("Payment success");  
+                                    rzp1.open();
+                                    e.preventDefault();
+                                    
+                                  // window.location.href = "http://127.0.0.1:8000/order_details/";
+                                }
+                            </script></li>
+                        <li class="list-group-item list-group-item-light text-center"><a class="btn btn-success" href="{% url 'main:menu' %}">Continue Buying</a></li>
+                      </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock content %}
